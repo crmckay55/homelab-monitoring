@@ -1,17 +1,16 @@
 source: unifi
-entity: health
+entity: ids_ips_event
 schema_version: 1
 
 collect:
   mode: single
-  # Fetches subsystem health (WAN, WLAN, LAN, VPN, etc.)
-  endpoint: "/proxy/network/api/s/default/stat/health"
+  # The specific endpoint for Threat Management (IPS/IDS) logs
+  endpoint: "/proxy/network/api/s/default/stat/ips/event"
 
 http:
-  # Your UDM / Controller IP
   base_url: "https://dmp.d.mckaylab.me"
   verify_tls: false
-  timeout_seconds: 20
+  timeout_seconds: 30
 
 auth:
   mode: unifi_api_key
@@ -22,7 +21,10 @@ storage:
   container_default: "homelab-telemetry"
   bronze_prefix: "bronze"
   system: "unifi"
-  dataset: "health"
+  dataset: "ids_ips_event"
 
 schedule:
+  # Check every 5 minutes. 
+  # Since this is a list, we'll ingest overlapping data, 
+  # but our Silver layer (Databricks) can dedup by '_id'.
   interval_seconds: 300

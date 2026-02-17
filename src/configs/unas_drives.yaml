@@ -1,12 +1,35 @@
 source: unifi
-entity: unas_drive
+entity: nas_drives
 schema_version: 1
 
-base_url_env: UNAS_BASE_URL
-verify_tls_env: UNAS_VERIFY_TLS
-auth: unifi_os_session
+collect:
+  mode: single
+  # The endpoint to get drive status (smart health, temperature, etc.)
+  endpoint: "/proxy/drive/api/v2/drives"
 
-endpoint: /proxy/drive/api/v2/drives
-method: GET
+http:
+  # Replace with your NAS IP (e.g., if it's different from your Gateway)
+  base_url: "https://nas.d.mckaylab.me" 
+  verify_tls: false
+  timeout_seconds: 20
 
-blob_path: bronze/unifi/unas/drives/dt={dt}/unas_drives_{dt}.jsonl
+auth:
+  # Reverting to Session Auth for NAS
+  mode: unifi_os_session
+  
+  # specific env vars for the NAS user
+  username_env: "UNAS_USERNAME"
+  password_env: "UNAS_PASSWORD"
+  
+  # Standard Unifi login path
+  login_path: "/api/auth/login"
+
+storage:
+  container_env: "AZURE_BLOB_CONTAINER"
+  container_default: "homelab-telemetry"
+  bronze_prefix: "bronze"
+  system: "unifi"
+  dataset: "nas_drives"
+
+schedule:
+  interval_seconds: 60 # 1 minute

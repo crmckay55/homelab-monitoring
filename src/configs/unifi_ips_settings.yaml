@@ -1,6 +1,0 @@
-source: unifi
-entity: ips_settings
-schema_version: 1
-endpoint: /proxy/network/api/s/default/get/setting/ips
-method: GET
-blob_path: bronze/unifi/ips_settings/dt={dt}/dmp_ips_settings_{dt}.jsonl

@@ -1,8 +1,28 @@
 source: unifi
-entity: device
+entity: devices
 schema_version: 1
-endpoint: /proxy/network/api/s/default/stat/device
-method: POST
-body:
-  _limit: 200
-blob_path: bronze/unifi/devices/dt={dt}/dmp_devices_{dt}.jsonl
+
+collect:
+  mode: single
+  # Fetches a list of all adopted Unifi devices (Gateway, Switches, APs)
+  endpoint: "/proxy/network/api/s/default/stat/device"
+
+http:
+  # Your UDM / Controller IP
+  base_url: "https://dmp.d.mckaylab.me"
+  verify_tls: false
+  timeout_seconds: 20
+
+auth:
+  mode: unifi_api_key
+  api_key_env: "DMP_API_KEY"
+
+storage:
+  container_env: "AZURE_BLOB_CONTAINER"
+  container_default: "homelab-telemetry"
+  bronze_prefix: "bronze"
+  system: "unifi"
+  dataset: "devices"
+
+schedule:
+  interval_seconds: 300

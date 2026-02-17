@@ -1,9 +1,28 @@
 source: unifi
-entity: client
+entity: clients
 schema_version: 1
-endpoint: /proxy/network/api/s/default/stat/sta
-method: POST
-body:
-  _limit: 2000
-  _sort: -last_seen
-blob_path: bronze/unifi/clients/dt={dt}/dmp_clients_{dt}.jsonl
+
+collect:
+  mode: single
+  # GET request to fetch all clients (active and history)
+  # Note: "/proxy/network" is required for UDM/UDM-Pro. 
+  # If using a self-hosted controller, remove "/proxy/network".
+  endpoint: "/proxy/network/api/s/default/stat/sta"
+
+http:
+  base_url: "https://dmp.d.mckaylab.me"
+  verify_tls: false
+  timeout_seconds: 20
+
+auth:
+  mode: unifi_api_key
+  api_key_env: "DMP_API_KEY"
+storage:
+  container_env: "AZURE_BLOB_CONTAINER"
+  container_default: "homelab-telemetry"
+  bronze_prefix: "bronze"
+  system: "unifi"
+  dataset: "clients"
+
+schedule:
+  interval_seconds: 300 # Run every 5 minutes (clients don't change that fast)

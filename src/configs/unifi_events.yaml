@@ -1,0 +1,5 @@
+source: unifi
+entity: event
+schema_version: 1
+endpoint: /proxy/network/api/s/default/stat/event
+blob_path: bronze/unifi/events/dt={dt}/dmp_events_{dt}.jsonl

@@ -1,0 +1,5 @@
+source: unifi
+entity: health
+schema_version: 1
+endpoint: /proxy/network/api/s/default/stat/health
+blob_path: bronze/unifi/health/dt={dt}/dmp_health_{dt}.jsonl

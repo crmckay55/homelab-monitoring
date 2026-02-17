@@ -1,0 +1,9 @@
+source: unifi
+entity: client
+schema_version: 1
+endpoint: /proxy/network/api/s/default/stat/sta
+method: POST
+body:
+  _limit: 2000
+  _sort: -last_seen
+blob_path: bronze/unifi/clients/dt={dt}/dmp_clients_{dt}.jsonl

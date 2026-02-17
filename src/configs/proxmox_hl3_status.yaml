@@ -1,0 +1,12 @@
+source: proxmox
+entity: node_status
+schema_version: 1
+
+base_url_env: PROXMOX_BASE_URL
+verify_tls_env: PROXMOX_VERIFY_TLS
+auth: proxmox_token
+
+endpoint: /api2/json/nodes/hl3/status
+method: GET
+
+blob_path: bronze/proxmox/node_status/dt={dt}/pve_node_status_{dt}.jsonl

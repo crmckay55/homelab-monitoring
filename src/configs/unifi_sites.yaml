@@ -1,0 +1,6 @@
+
+source: unifi
+entity: health
+schema_version: 1
+endpoint: /proxy/network/integration/v1/sites
+blob_path: bronze/unifi/sites/dt={dt}/dmp_sites_{dt}.jsonl

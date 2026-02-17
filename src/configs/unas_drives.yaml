@@ -1,0 +1,12 @@
+source: unifi
+entity: unas_drive
+schema_version: 1
+
+base_url_env: UNAS_BASE_URL
+verify_tls_env: UNAS_VERIFY_TLS
+auth: unifi_os_session
+
+endpoint: /proxy/drive/api/v2/drives
+method: GET
+
+blob_path: bronze/unifi/unas/drives/dt={dt}/unas_drives_{dt}.jsonl

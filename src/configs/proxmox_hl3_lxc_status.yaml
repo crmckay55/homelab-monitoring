@@ -1,0 +1,24 @@
+source: proxmox
+entity: lxc_status_current
+schema_version: 1
+
+auth: proxmox_token
+proxmox_token_id_env: PROXMOX_API_TOKEN_ID
+verify_tls_env: PROXMOX_VERIFY_TLS
+
+proxmox_token_secret_env: PROXMOX_API_TOKEN_SECRET_HL3   # (varies per host)
+base_url_env: PROXMOX_BASE_URL_HL3
+
+blob_path: bronze/proxmox/lxc_status_current/dt={dt}/pve_lxc_status_current_{dt}.jsonl
+
+fanout:
+  extra_meta:
+    node: hl3
+
+  list_endpoint: /api2/json/nodes/hl3/lxc
+  list_method: GET
+
+  id_field: vmid
+
+  item_endpoint_template: /api2/json/nodes/hl3/lxc/{vmid}/status/current
+  item_method: GET

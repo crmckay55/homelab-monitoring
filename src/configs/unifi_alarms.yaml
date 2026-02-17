@@ -1,0 +1,9 @@
+source: unifi
+entity: alarm
+schema_version: 1
+endpoint: /proxy/network/api/s/default/list/alarm
+method: POST
+body:
+  _limit: 200
+  _sort: -time
+blob_path: bronze/unifi/alarms/dt={dt}/dmp_alarms_{dt}.jsonl

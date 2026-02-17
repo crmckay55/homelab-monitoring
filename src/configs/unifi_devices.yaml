@@ -1,0 +1,8 @@
+source: unifi
+entity: device
+schema_version: 1
+endpoint: /proxy/network/api/s/default/stat/device
+method: POST
+body:
+  _limit: 200
+blob_path: bronze/unifi/devices/dt={dt}/dmp_devices_{dt}.jsonl

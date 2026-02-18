@@ -6,14 +6,14 @@ collect:
   mode: single
   # --- DEFINE NODE HERE ---
   # This makes {node} available for the endpoint and base_url,
-  # AND it ensures the output filename includes "hl4".
-  node: hl4
+  # AND it ensures the output filename includes "hl2".
+  node: hl2
   
   # Fetch the status of the node itself (CPU, RAM, Uptime, etc.)
   endpoint: "/api2/json/nodes/{node}/status"
 
 http:
-  # {node} is replaced by "hl4" automatically
+  # {node} is replaced by "hl2" automatically
   base_url: "https://{node}.d.mckaylab.me:8006"
   verify_tls: false
   timeout_seconds: 20
@@ -21,7 +21,7 @@ http:
 auth:
   mode: proxmox_token
   token_id_env: "PROXMOX_API_TOKEN_ID"
-  # {NODE} is automatically available as "HL4"
+  # {NODE} is automatically available as "HL2"
   token_secret_env: "PROXMOX_API_TOKEN_SECRET_{NODE}"
 
 storage:
